@@ -9,12 +9,12 @@ const DisputeBreakdown = () => {
   const resolvedPercentage = (resolvedAmount / totalAmount) * 100;
 
   const resolvedOffset = (100 - resolvedPercentage) * 2.8;
-  const pendingOffset = 100 * 2.8;
+  const pendingOffset = 100 * 2.2;
 
   return (
-    <div className="w-full flex flex-col gap-4 border border-[#f0f0f0] rounded-[25px] p-[20px]">
+    <div className="w-full flex flex-col border border-[#f0f0f0] rounded-[25px] p-[20px]">
       <p className="text-[#5c5959] text-sm font-normal">Disputes breakdown</p>
-      <div className="relative flex items-center justify-center">
+      <div className="relative flex items-start justify-center">
         <svg
           width="279.53"
           height="276.6"
@@ -25,12 +25,12 @@ const DisputeBreakdown = () => {
           <defs>
             <linearGradient
               id="resolvedGradient"
-              x1="0%"
+              x1="100%"
               y1="100%"
               x2="100%"
-              y2="0%"
+              y2="1000%"
             >
-              <stop offset="0%" stopColor="#FF9C33" />
+              <stop offset="100%" stopColor="#FF9C33" />
               <stop offset="100%" stopColor="#FF9C33" />
             </linearGradient>
             <linearGradient
