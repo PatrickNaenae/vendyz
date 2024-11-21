@@ -8,6 +8,7 @@ const DisputeBreakdown = () => {
 
   const resolvedPercentage = (resolvedAmount / totalAmount) * 100;
 
+  // Adjust these values to change the visual arc height
   const resolvedOffset = (100 - resolvedPercentage) * 2.8;
   const pendingOffset = 100 * 2.2;
 
@@ -17,7 +18,7 @@ const DisputeBreakdown = () => {
       <div className="relative flex items-start justify-center">
         <svg
           width="279.53"
-          height="276.6"
+          height="240"
           viewBox="0 0 160 160"
           xmlns="http://www.w3.org/2000/svg"
           className="rounded-[16.71px]"
@@ -45,15 +46,16 @@ const DisputeBreakdown = () => {
             </linearGradient>
           </defs>
           <path
-            d="M20,120 A50,50 0 1,1 140,120"
+            d="M10,110 A50,50 0 1,1 150, 110"
             fill="none"
             stroke="url(#resolvedGradient)"
             strokeWidth="15"
             strokeDasharray="314 314"
             strokeDashoffset={resolvedOffset}
           />
+
           <path
-            d="M20,120 A50,50 0 1,1 140,120"
+            d="M10,110 A50,50 0 1,1 150, 110"
             fill="none"
             stroke="url(#pendingGradient)"
             strokeWidth="15"
@@ -61,7 +63,7 @@ const DisputeBreakdown = () => {
             strokeDashoffset={pendingOffset - resolvedOffset}
           />
         </svg>
-        <div className="absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 space-y-4">
+        <div className="absolute top-2/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 space-y-4">
           <p className="text-[#5C5959] text-base font-medium text-center">
             Disputes
           </p>
@@ -70,7 +72,6 @@ const DisputeBreakdown = () => {
           </p>
         </div>
       </div>
-
       <div className="custom-shadow shadow-md p-[15px] rounded-[20px] flex items-center justify-between">
         <div className="flex flex-col gap-2">
           <div className="flex items-start gap-1">
