@@ -36,11 +36,11 @@ export function formatPrice(
 
 export const formatDateTime = (dateString: string | null | undefined) => {
   try {
-    const date = dateString ? parseISO(dateString) : "";
-    if (dateString && !date) {
+    const date = dateString ? parseISO(dateString) : null;
+    if (!date) {
       throw new Error("Invalid date format");
     }
-    return format(date, "d MMM, yyyy, HH:mm:ss");
+    return format(date, "MMM dd, yyyy • hh:mm a");
   } catch (error) {
     return `Invalid date format ${error}`;
   }

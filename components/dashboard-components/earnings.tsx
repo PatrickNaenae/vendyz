@@ -28,7 +28,7 @@ const Earnings = () => {
       <div className=" flex flex-col gap-[4px] border border-[#f0f0f0] rounded-[25px] p-[20px]">
         <p className="text-[#5C5959] text-sm font-normal">Escrow balance</p>
         <div className="flex items-start justify-between">
-          <p className="text-[#232323] text-base font-bold">₦84,310.12</p>
+          <p className="text-[#232323] text-base font-bold">₦210,639.44</p>
           <div className="flex flex-col gap-1 text-[#232323] text-xs">
             <div className="flex  items-center gap-1">
               <Image
