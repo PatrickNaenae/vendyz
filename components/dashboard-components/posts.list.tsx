@@ -3,13 +3,14 @@
 import React, { useState, useMemo, useEffect } from "react";
 import CustomPagination from "../pagination";
 import { useSearchParams } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { useFetchPostsQuery } from "@/redux/api/posts-api";
+import { setPosts } from "@/redux/slices/posts-slice";
 import CreatePostForm from "./create-post-form";
 
 const PostList = () => {
-  const posts = useSelector((state: RootState) => state.posts.posts);
-
+  const dispatch = useDispatch();
+  const { data: posts = [], isLoading } = useFetchPostsQuery();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const searchParams = useSearchParams();
@@ -17,6 +18,13 @@ const PostList = () => {
   const initialPage = currentPageFromURL ? parseInt(currentPageFromURL) : 1;
 
   const [currentPage, setCurrentPage] = useState(initialPage);
+
+  // When data is fetched, store it in Redux
+  useEffect(() => {
+    if (posts.length) {
+      dispatch(setPosts(posts)); // Dispatch to Redux store
+    }
+  }, [posts, dispatch]);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -38,8 +46,10 @@ const PostList = () => {
     }
   }, [currentPage, totalPages, searchParams]);
 
-  if (!posts.length) {
-    return <p className="text-center my-10">No posts available</p>;
+  const startingIndex = (currentPage - 1) * postsPerPage + 1;
+
+  if (isLoading) {
+    return <p className="text-center my-10">Loading...</p>;
   }
 
   return (
@@ -58,9 +68,9 @@ const PostList = () => {
         <table className="min-w-full table-auto border-collapse">
           <thead className="bg-gray-100">
             <tr>
-              <th className="border-b px-4 py-2 text-left">ID</th>
-              <th className="border-b px-4 py-2 text-left">Title</th>
-              <th className="border-b px-4 py-2 text-left">Body</th>
+              <th className="border-b px-4 py-2 text-center">ID</th>
+              <th className="border-b px-4 py-2 text-center">Title</th>
+              <th className="border-b px-4 py-2 text-center">Body</th>
             </tr>
           </thead>
           <tbody>
