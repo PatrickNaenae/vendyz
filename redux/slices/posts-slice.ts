@@ -1,60 +1,29 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-
-interface Post {
-  title: string;
-  body: string;
-}
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Post } from "@/redux/api/posts-api";
 
 interface PostsState {
-  items: Post[];
+  posts: Post[];
   status: "idle" | "loading" | "failed";
 }
 
 const initialState: PostsState = {
-  items: [],
+  posts: [],
   status: "idle",
 };
-
-export const fetchPosts = createAsyncThunk<Post[]>(
-  "posts/fetchPosts",
-  async () => {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-    return response.json();
-  }
-);
-
-export const createPost = createAsyncThunk<Post, Post>(
-  "posts/createPost",
-  async (newPost) => {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-      method: "POST",
-      body: JSON.stringify(newPost),
-      headers: { "Content-Type": "application/json" },
-    });
-    return response.json();
-  }
-);
 
 const postsSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchPosts.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(fetchPosts.fulfilled, (state, action: PayloadAction<Post[]>) => {
-        state.status = "idle";
-        state.items = action.payload;
-      })
-      .addCase(fetchPosts.rejected, (state) => {
-        state.status = "failed";
-      })
-      .addCase(createPost.fulfilled, (state, action: PayloadAction<Post>) => {
-        state.items.push(action.payload);
-      });
+  reducers: {
+    setPosts: (state, action: PayloadAction<Post[]>) => {
+      state.posts = action.payload;
+    },
+    addPost: (state, action: PayloadAction<Post>) => {
+      state.posts.push(action.payload);
+    },
   },
 });
+
+export const { setPosts, addPost } = postsSlice.actions;
 
 export default postsSlice.reducer;

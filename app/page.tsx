@@ -4,8 +4,8 @@ import {
   Earnings,
   OrdersList,
   TransactionsTable,
+  PostList,
 } from "@/components/dashboard-components";
-import { PostList } from "@/components/dashboard-components/posts.list";
 
 export default function Home() {
   return (
