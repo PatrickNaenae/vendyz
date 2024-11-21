@@ -70,25 +70,25 @@ const TransactionsTable = () => {
             <TableRow>
               <TableHead
                 scope="col"
-                className="px-4 py-5 font-normal text-[#9b9697]"
+                className="px-4 py-1 font-normal text-[#9b9697]"
               >
                 Name
               </TableHead>
               <TableHead
                 scope="col"
-                className="px-4 py-5 font-normal text-[#9b9697]"
+                className="px-4 py-1 font-normal text-[#9b9697]"
               >
                 Amount
               </TableHead>
               <TableHead
                 scope="col"
-                className="px-4 py-5 font-normal text-[#9b9697]"
+                className="px-4 py-1 font-normal text-[#9b9697]"
               >
                 Date
               </TableHead>
               <TableHead
                 scope="col"
-                className="px-4 py-5 font-normal text-[#9b9697]"
+                className="px-4 py-1 font-normal text-[#9b9697]"
               >
                 Type
               </TableHead>
@@ -126,7 +126,7 @@ const TransactionsTable = () => {
                   {formatDateTime(customer.createdAt)}
                 </TableCell>
 
-                <TableCell className="text-center">
+                <TableCell className="whitespace-nowrap px-3 py-3">
                   <p
                     className={`inline-flex text-sm rounded-[100px] py-0.5 px-4 ${
                       customer.type === "credit"

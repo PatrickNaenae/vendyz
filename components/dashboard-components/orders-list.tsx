@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { formatPrice } from "@/lib/utils";
+import { Separator } from "@/components/ui/separator";
 
 const itemImages: { [key: string]: string } = {
   Laptop: "/orders-images/laptop.png",
@@ -55,21 +56,21 @@ const OrdersList = () => {
 
   return (
     <>
-      <Card className="flex rounded-[20px] flex-col bg-white border border-[#f0f0f0] w-full p-6">
-        <div className="flex items-center justify-between gap-4 text-[#5C5959]">
+      <Card className="flex rounded-[20px] flex-col bg-white border border-[#f0f0f0] w-full">
+        <div className="flex items-center p-6 justify-between gap-4 text-[#5C5959]">
           <h2 className="text-sm font-normal">Orders</h2>
           <p className="flex text-xs font-medium items-center gap-2 rounded-[100px] py-[8px] px-[15px] border border-[#f0f0f0] shadow-custom">
             View more
           </p>
         </div>
-
-        <div className="mt-4">
+        <Separator />
+        <div className="">
           {randomOrders.map((order) => (
             <div
               key={order.slug}
-              className="flex justify-between items-center py-4 border-b last:border-none"
+              className="w-full flex justify-between items-center py-3 border-b last:border-none"
             >
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center px-6 space-x-4">
                 <Image
                   src={order.imageUrl}
                   alt="Item Image"
@@ -77,7 +78,7 @@ const OrdersList = () => {
                   width={32}
                   height={32}
                 />
-                <div className="font-medium flex flex-col">
+                <div className="font-medium flex gap-1 flex-col">
                   <p className="text-[#232323] text-sm">{order.itemName}</p>
                   <p className="text-sm text-[#5C5959]">
                     {formatPrice(order.itemPrice)}
@@ -87,9 +88,8 @@ const OrdersList = () => {
                   </p>
                 </div>
               </div>
-
               <div
-                className={`text-sm font-medium rounded-[100px] py-1 px-4 ${
+                className={`text-sm font-medium rounded-[100px] py-1 px-4 mx-6 ${
                   order.status === "Paid"
                     ? "text-[#449E6A] bg-[#EFFFF6] border border-[#83F3B2]"
                     : "text-[#232323] bg-[#F4F4F4] border border-[#F0F0F0]"
