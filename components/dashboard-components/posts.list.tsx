@@ -3,11 +3,13 @@
 import React, { useState, useMemo, useEffect } from "react";
 import CustomPagination from "../pagination";
 import { useSearchParams } from "next/navigation";
-import { useFetchPostsQuery } from "@/redux/api/posts-api";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 import CreatePostForm from "./create-post-form";
 
 const PostList = () => {
-  const { data: posts = [], isLoading } = useFetchPostsQuery();
+  const posts = useSelector((state: RootState) => state.posts.posts);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const searchParams = useSearchParams();
@@ -15,8 +17,6 @@ const PostList = () => {
   const initialPage = currentPageFromURL ? parseInt(currentPageFromURL) : 1;
 
   const [currentPage, setCurrentPage] = useState(initialPage);
-
-  console.log(posts);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -38,10 +38,8 @@ const PostList = () => {
     }
   }, [currentPage, totalPages, searchParams]);
 
-  const startingIndex = (currentPage - 1) * postsPerPage + 1;
-
-  if (isLoading) {
-    return <p className="text-center my-10">Loading...</p>;
+  if (!posts.length) {
+    return <p className="text-center my-10">No posts available</p>;
   }
 
   return (
@@ -60,9 +58,9 @@ const PostList = () => {
         <table className="min-w-full table-auto border-collapse">
           <thead className="bg-gray-100">
             <tr>
-              <th className="border-b px-4 py-2 text-center">ID</th>
-              <th className="border-b px-4 py-2 text-center">Title</th>
-              <th className="border-b px-4 py-2 text-center">Body</th>
+              <th className="border-b px-4 py-2 text-left">ID</th>
+              <th className="border-b px-4 py-2 text-left">Title</th>
+              <th className="border-b px-4 py-2 text-left">Body</th>
             </tr>
           </thead>
           <tbody>

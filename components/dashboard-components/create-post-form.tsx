@@ -1,8 +1,13 @@
+"use client";
+
 import { useCreatePostMutation } from "@/redux/api/posts-api";
+import { addPost } from "@/redux/slices/posts-slice";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const CreatePostForm = ({ closeModal }: { closeModal: () => void }) => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [createPost, { isLoading, isSuccess }] = useCreatePostMutation();
@@ -10,7 +15,10 @@ const CreatePostForm = ({ closeModal }: { closeModal: () => void }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const response = await createPost({ title, body });
-    console.log(response);
+
+    if (response.data) {
+      dispatch(addPost(response.data));
+    }
   };
 
   const handleCloseSuccessModal = () => {
