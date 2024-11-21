@@ -15,6 +15,8 @@ const PostList = () => {
 
   const searchParams = useSearchParams();
 
+  console.log(posts);
+
   const currentPageFromURL = searchParams.get("page");
   const initialPage = currentPageFromURL ? parseInt(currentPageFromURL) : 1;
 
