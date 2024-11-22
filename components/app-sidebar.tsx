@@ -70,7 +70,7 @@ export function AppSidebar() {
                   key={item.title}
                   className={`py-[10px] ${
                     pathname.includes(item.url)
-                      ? "border-l-4 border-[#5271FF]"
+                      ? "border-l-4 border-[#5271FF] text-blue-600"
                       : ""
                   }`}
                 >
@@ -82,7 +82,13 @@ export function AppSidebar() {
                         width={20}
                         height={20}
                       />
-                      <span className="text-sm font-medium text-[#9b9697]">
+                      <span
+                        className={`text-sm font-medium ${
+                          pathname.includes(item.url)
+                            ? "text-[#5271FF]"
+                            : "text-[#9b9697]"
+                        }`}
+                      >
                         {item.title}
                       </span>
                     </Link>
